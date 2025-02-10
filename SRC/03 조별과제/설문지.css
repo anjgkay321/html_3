@@ -14,23 +14,22 @@ main > .month-2 {
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
+
   position: relative;
   left: 0;
+  display: flex;
 }
 
 main > .radio > input[type="radio"] {
   display: none;
 }
-main > .month-2 {
-  display: flex;
-}
 main > section > .month {
   display: flex;
   margin-top: 30px;
-  position: absolute;
   font-size: 30px;
+  width: 100%;
 }
+
 main > section > .month > label {
   margin-bottom: 30px;
 }
@@ -50,6 +49,7 @@ main > .month-middle {
   width: 1286.48px;
   display: flex;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 main > section > .month-description {
