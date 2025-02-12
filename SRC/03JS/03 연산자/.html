@@ -33,6 +33,16 @@
         left: 375px;
       }
 
+      #sword {
+        position: absolute;
+        width: 10px;
+        height: 30px;
+        background-color: gold;
+        top: 10px;
+        left: 0;
+        display: none;
+      }
+
       .monster {
         position: absolute;
         width: 40px;
@@ -57,6 +67,7 @@
     <h1>키보드로 몬스터 잡기 게임</h1>
     <div id="gameArea">
       <div id="player"></div>
+      <div id="sword"></div>
     </div>
     <div id="score">점수: 0</div>
     <div id="gameOver">게임 오버! 점수: <span id="finalScore"></span></div>
@@ -68,11 +79,14 @@
       let gameOver = false;
       const gameArea = document.getElementById("gameArea");
       const player = document.getElementById("player");
+      const sword = document.getElementById("sword");
       const scoreDisplay = document.getElementById("score");
       const gameOverDisplay = document.getElementById("gameOver");
       const finalScore = document.getElementById("finalScore");
-      const playerSpeed = 10;
+      const playerSpeed = 15;
+      const swordLength = 100;
       let monsters = [];
+      let attacking = false;
 
       // 캐릭터 이동 함수
       function movePlayer(event) {
@@ -109,6 +123,44 @@
         }
       }
 
+      // X 키로 공격하기
+      function attack() {
+        if (gameOver || attacking) return;
+
+        attacking = true;
+        sword.style.display = "block"; // 칼을 보이게
+        sword.style.top = player.style.top;
+        sword.style.left = player.style.left;
+        sword.style.transform = "rotate(90deg)"; // 칼을 수평으로 회전시킴
+
+        setTimeout(() => {
+          sword.style.display = "none"; // 일정 시간 후 칼 숨기기
+          attacking = false;
+        }, 300);
+
+        // 칼이 몬스터와 충돌하는지 체크
+        checkSwordHit();
+      }
+
+      // 칼이 몬스터를 맞췄는지 확인
+      function checkSwordHit() {
+        const swordRect = sword.getBoundingClientRect();
+        monsters.forEach((monster) => {
+          const monsterRect = monster.getBoundingClientRect();
+          if (
+            swordRect.left < monsterRect.right &&
+            swordRect.right > monsterRect.left &&
+            swordRect.top < monsterRect.bottom &&
+            swordRect.bottom > monsterRect.top
+          ) {
+            monster.remove();
+            monsters = monsters.filter((m) => m !== monster);
+            score++;
+            scoreDisplay.textContent = "점수: " + score;
+          }
+        });
+      }
+
       // 몬스터 생성 함수
       function createMonster() {
         if (gameOver) return;
@@ -138,11 +190,8 @@
           playerRect.top < monsterRect.bottom &&
           playerRect.bottom > monsterRect.top
         ) {
-          // 충돌 시 점수 증가
-          score++;
-          scoreDisplay.textContent = "점수: " + score;
-          monster.remove();
-          monsters = monsters.filter((m) => m !== monster);
+          // 충돌 시 게임 오버
+          endGame();
         }
       }
 
@@ -162,12 +211,17 @@
         scoreDisplay.textContent = "점수: " + score;
         gameOverDisplay.style.display = "none";
         monsters = [];
-        gameInterval = setInterval(createMonster, 1500); // 1.5초마다 몬스터 생성
+        gameInterval = setInterval(createMonster, 1000); // 1초마다 몬스터 생성
         monsterInterval = setTimeout(endGame, 30000); // 30초 후 게임 종료
       }
 
       // 게임 시작
       window.addEventListener("keydown", movePlayer);
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "x" || event.key === "X") {
+          attack();
+        }
+      });
       startGame();
     </script>
   </body>
