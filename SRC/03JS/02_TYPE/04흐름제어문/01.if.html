@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="box"
+      style="width: 200px; height: 100px; background-color: orange"
+    ></div>
+    <script>
+      const boxE1 = document.querySelector(".box");
+
+      let box_style = prompt(
+        "값을 입력하세요\n(;단위로 `가로/새로`width,height,background-color,color 를 입력하세요)"
+      );
+      const style_arr = box_style.split(";");
+      if (style_arr[0] == "가로") {
+        console.log("가로스타일");
+        boxE1.setAttribute(
+          `style`,
+          `width:${style_arr[1]};height:${style_arr[2]};background-color:${style_arr[3]};color:${style_arr[4]}`
+        );
+        // document.write(`<h1>${number}짝수입니다.</hr>`);
+      } else {
+        console.log("세로스타일");
+
+        // document.write(`<h1>${number}홀수입니다.</hr>`);
+      }
+    </script>
+  </body>
+</html>

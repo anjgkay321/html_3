@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>키보드로 몬스터 잡기 게임</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 0;
+      }
+
+      #gameArea {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        margin: 50px auto;
+        background-color: #e0e0e0;
+        border: 2px solid #000;
+        overflow: hidden;
+      }
+
+      #player {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        border-radius: 50%;
+        top: 275px;
+        left: 375px;
+      }
+
+      .monster {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: red;
+        border-radius: 50%;
+      }
+
+      #score {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      #gameOver {
+        display: none;
+        font-size: 30px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>키보드로 몬스터 잡기 게임</h1>
+    <div id="gameArea">
+      <div id="player"></div>
+    </div>
+    <div id="score">점수: 0</div>
+    <div id="gameOver">게임 오버! 점수: <span id="finalScore"></span></div>
+
+    <script>
+      let score = 0;
+      let gameInterval;
+      let monsterInterval;
+      let gameOver = false;
+      const gameArea = document.getElementById("gameArea");
+      const player = document.getElementById("player");
+      const scoreDisplay = document.getElementById("score");
+      const gameOverDisplay = document.getElementById("gameOver");
+      const finalScore = document.getElementById("finalScore");
+      const playerSpeed = 10;
+      let monsters = [];
+
+      // 캐릭터 이동 함수
+      function movePlayer(event) {
+        if (gameOver) return;
+
+        const playerRect = player.getBoundingClientRect();
+        const gameAreaRect = gameArea.getBoundingClientRect();
+
+        switch (event.key) {
+          case "ArrowUp":
+            if (playerRect.top > gameAreaRect.top) {
+              player.style.top =
+                playerRect.top - gameAreaRect.top - playerSpeed + "px";
+            }
+            break;
+          case "ArrowDown":
+            if (playerRect.bottom < gameAreaRect.bottom) {
+              player.style.top =
+                playerRect.top - gameAreaRect.top + playerSpeed + "px";
+            }
+            break;
+          case "ArrowLeft":
+            if (playerRect.left > gameAreaRect.left) {
+              player.style.left =
+                playerRect.left - gameAreaRect.left - playerSpeed + "px";
+            }
+            break;
+          case "ArrowRight":
+            if (playerRect.right < gameAreaRect.right) {
+              player.style.left =
+                playerRect.left - gameAreaRect.left + playerSpeed + "px";
+            }
+            break;
+        }
+      }
+
+      // 몬스터 생성 함수
+      function createMonster() {
+        if (gameOver) return;
+
+        const monster = document.createElement("div");
+        monster.classList.add("monster");
+        monster.style.left = Math.random() * (gameArea.clientWidth - 40) + "px";
+        monster.style.top = Math.random() * (gameArea.clientHeight - 40) + "px";
+        gameArea.appendChild(monster);
+        monsters.push(monster);
+
+        // 몬스터와 캐릭터 충돌 체크
+        setInterval(() => {
+          if (gameOver) return;
+          checkCollision(monster);
+        }, 10);
+      }
+
+      // 몬스터와 캐릭터 충돌 체크 함수
+      function checkCollision(monster) {
+        const monsterRect = monster.getBoundingClientRect();
+        const playerRect = player.getBoundingClientRect();
+
+        if (
+          playerRect.left < monsterRect.right &&
+          playerRect.right > monsterRect.left &&
+          playerRect.top < monsterRect.bottom &&
+          playerRect.bottom > monsterRect.top
+        ) {
+          // 충돌 시 점수 증가
+          score++;
+          scoreDisplay.textContent = "점수: " + score;
+          monster.remove();
+          monsters = monsters.filter((m) => m !== monster);
+        }
+      }
+
+      // 게임 종료 조건
+      function endGame() {
+        gameOver = true;
+        clearInterval(gameInterval);
+        clearInterval(monsterInterval);
+        finalScore.textContent = score;
+        gameOverDisplay.style.display = "block";
+      }
+
+      // 게임 시작 함수
+      function startGame() {
+        score = 0;
+        gameOver = false;
+        scoreDisplay.textContent = "점수: " + score;
+        gameOverDisplay.style.display = "none";
+        monsters = [];
+        gameInterval = setInterval(createMonster, 1500); // 1.5초마다 몬스터 생성
+        monsterInterval = setTimeout(endGame, 30000); // 30초 후 게임 종료
+      }
+
+      // 게임 시작
+      window.addEventListener("keydown", movePlayer);
+      startGame();
+    </script>
+  </body>
+</html>
