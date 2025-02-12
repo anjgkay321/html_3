@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+
+}
+
+:root {
+    font-size: 12px;
+}
+
+/* common */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-top: 5px;
+    font-family: "nanum gothic", "나눔고딕", "NanumGothic", "NanumGothicWebFont", "Malgun Gothic", "맑은 고딕";
+    font-size: .8rem;
+    color: rgb(85, 85, 85);
+    font-family: sans-serif;
+
+    min-height: 3000px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* layout */
+.layout-basic {
+    padding: 0 240px;
+}
+
+.layout-width {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+/* 
+    sementic selector
+    기본 구조태그에 대한 style
+ */
+
+ /* wrapper */
+ .wrapper{}
+
+ /* header */
+ .wrapper>header{}
+ .wrapper>header>.top-header{}
+ .wrapper>header>nav{}
+ 
+ /* main */
+ .wrapper>main{}
+
+ /* footer */
+ .wrapper>footer{}

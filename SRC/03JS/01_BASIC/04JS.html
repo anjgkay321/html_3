@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-  </head>
-  <body>
+</head>
+<body>
+    
+
     <script>
-      console.log(typeof "HELLO WORLD");
-      console.log(typeof "HELLO WORLD");
-      console.log(typeof (10 + 20 + 30));
-      console.log(typeof "10+20+30");
-      console.log(typeof true);
-      //   true : 참
-      // false : 거짓
-      console.log(typeof null);
-      console.log(typeof undefined);
+        console.log(typeof "HELLO WORLD");
+        console.log(typeof 'HELLO WORLD');
+        console.log(typeof (10+20+30));
+        console.log(typeof ("10" + "20" + "30"));
+        console.log(typeof true);
+        console.log(typeof null);
+        console.log(typeof undefined);
+        let test ;
+        console.log('test',typeof test)
 
-      let test;
-      console.log(typeof test);
-      let test2 = null;
-      console.log(typeof test2);
+        let test2 = null;
+        console.log('test2',typeof test2);
 
-      if (test2) {
-        console.log("test2 TRUE");
-      } else {
-        console.log("test2 FALSE");
-      }
-      if (test) {
-        console.log("test TRUE");
-      } else {
-        console.log("test FALSE");
-      }
+        if(test2){
+            console.log("test2 TRUE");
+        }
+        else{
+            console.log("test2 FALSE");
+        }
+
+        if(test){
+            console.log("test TRUE");
+        }else{
+            console.log("test FALSE");
+        }
+
+        // undefined : 자체 자료형(선언)
+        // 조건식 사용되게 되면 false 
+
+        // null : object 형
+       // 조건식 사용되게 되면 false 
+
+      
+   
     </script>
-  </body>
+</body>
 </html>

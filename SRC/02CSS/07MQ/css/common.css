@@ -1,6 +1,6 @@
-:root {
-  font-size: 32px;
+:root{
+    font-size:8px;
 }
-div {
-  transition: 2s;
+div{
+    transition: .5s;
 }

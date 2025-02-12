@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- BS5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-size: 0.9rem;
+      }
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      form {
+        width: 400px !important;
+        border: 1px solid black;
+        /* 포지셔닝 */
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        max-height: 800px;
+        padding: 20px;
+      }
+      form > div {
+        height: 50px;
+        margin-bottom: 2px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="/test.jsp" method="get" class="mt-5">
+      <div class="row mb-2 align-items-center">
+        <img src="" alt="이미지로고" class="col text-center" />
+      </div>
+      <div class="row mb-2 text-center title mb-2">
+        <h2 class="col">로그인 페이지</h2>
+      </div>
+      <div class="row mb-2 align-items-center">
+        <label for="" class="col-3">아이디 : </label>
+        <input type="text" name="username" class="col form-control" />
+      </div>
+      <div class="row mb-2 align-items-center">
+        <label for="" class="col-3">패스워드 : </label>
+        <input type="text" name="username" class="col form-control" />
+      </div>
+      <div class="row m-0 p-0 form-check">
+        <input
+          id="keep_login"
+          type="checkbox"
+          class="col-1 p-0 mb-2 ms-2 mt-2 form-check-input"
+        />
+        <label for="keep_login" class="col-10 ms-2 mt-2 form-check-label p-0"
+          >로그인 상태를 유지</label
+        >
+      </div>
+      <div class="row mb-2">
+        <button class="col btn btn-success">로그인</button>
+      </div>
+      <div class="row mb-2">
+        <button id="sign_in" class="col btn btn-light">회원가입</button>
+      </div>
+    </form>
+  </body>
+</html>
