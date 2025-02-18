@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        font-size: 20px;
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="rownum" placeholder="행의 개수 입력" style="width: 200px" />
+    <input id="colnum" placeholder="열의 개수 입력" style="width: 200px" />
+    <button onclick="makemap()">생성</button>
+    <hr />
+    <table id="tbl">
+      <tbody></tbody>
+    </table>
+
+    <script>
+      function makemap() {
+        // 입력값 가져오기
+        const rownum = parseInt(document.getElementById("rownum").value);
+        const colnum = parseInt(document.getElementById("colnum").value);
+
+        // 유효성 검사: 입력값이 숫자이고 1 이상이어야 함
+        if (isNaN(rownum) || isNaN(colnum) || rownum <= 0 || colnum <= 0) {
+          alert("행과 열의 개수는 1 이상의 숫자로 입력해주세요.");
+          return;
+        }
+
+        // 테이블 생성
+        const tableBody = document.querySelector("#tbl tbody");
+        tableBody.innerHTML = ""; // 기존 테이블 내용 초기화
+
+        let counter = 1; // 숫자를 1부터 시작
+
+        // 행과 열을 기반으로 테이블을 동적으로 생성
+        for (let i = 0; i < rownum; i++) {
+          const row = document.createElement("tr"); // 새로운 행 생성
+
+          for (let j = 0; j < colnum; j++) {
+            const cell = document.createElement("td"); // 새로운 셀 생성
+            const input = document.createElement("input"); // 입력 필드 생성
+            input.type = "text"; // 텍스트 입력 필드
+
+            // 셀에 숫자 입력
+            input.value = counter;
+            cell.appendChild(input); // 셀에 입력 필드 추가
+            row.appendChild(cell); // 행에 셀 추가
+
+            counter++; // 숫자 증가
+          }
+
+          tableBody.appendChild(row); // 테이블 본문에 행 추가
+        }
+      }
+    </script>
+  </body>
+</html>
