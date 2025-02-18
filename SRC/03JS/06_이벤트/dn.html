@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개발자 포트폴리오</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      section {
+        padding: 20px;
+        margin: 10px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .project {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .project img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .tech-stack span {
+        background-color: #eee;
+        padding: 8px 16px;
+        border-radius: 20px;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>나의 개발자 포트폴리오</h1>
+      <p>안녕하세요! 저는 웹 개발자 [당신의 이름]입니다.</p>
+    </header>
+
+    <section id="about">
+      <h2>자기소개</h2>
+      <p>
+        저는 [몇 년] 동안 웹 개발에 대한 열정을 가지고 다양한 프로젝트를
+        진행했습니다. 현재는 프론트엔드 개발을 중심으로 웹 애플리케이션을
+        구축하고 있습니다. 최신 기술과 도구들을 사용하여 깔끔하고 효율적인
+        코드를 작성하는 것을 목표로 합니다.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>기술 스택</h2>
+      <div class="tech-stack">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>React</span>
+        <span>Node.js</span>
+        <span>Git</span>
+        <span>MongoDB</span>
+        <span>Python</span>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>프로젝트</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>프로젝트 1</h3>
+          <img src="project1.jpg" alt="프로젝트 1 이미지" />
+          <p>이 프로젝트는 [프로젝트 설명].</p>
+          <a href="https://github.com/yourusername/project1" target="_blank"
+            >GitHub 링크</a
+          >
+        </div>
+
+        <div class="project">
+          <h3>프로젝트 2</h3>
+          <img src="project2.jpg" alt="프로젝트 2 이미지" />
+          <p>이 프로젝트는 [프로젝트 설명].</p>
+          <a href="https://github.com/yourusername/project2" target="_blank"
+            >GitHub 링크</a
+          >
+        </div>
+
+        <!-- 다른 프로젝트들 추가 -->
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 [당신의 이름] - 모든 권리 보유</p>
+    </footer>
+  </body>
+</html>

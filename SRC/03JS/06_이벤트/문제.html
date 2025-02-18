@@ -13,11 +13,17 @@
         height: 80px;
         text-align: center;
         font-size: 20px;
+        cursor: pointer;
+        /* border: 1px solid #000; 테두리 설정  */
       }
       input {
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+        background-color: white; /* 기본 배경색은 흰색 */
+      }
+      .selected {
+        background-color: gray; /* 클릭한 셀의 배경색 */
       }
     </style>
   </head>
@@ -31,6 +37,10 @@
     </table>
 
     <script>
+      let selectedCell = null; // 선택된 셀을 저장할 변수
+      let rows = []; // 테이블의 행 배열을 저장
+      let cols = []; // 테이블의 열 배열을 저장
+
       function makemap() {
         // 입력값 가져오기
         const rownum = parseInt(document.getElementById("rownum").value);
@@ -46,12 +56,17 @@
         const tableBody = document.querySelector("#tbl tbody");
         tableBody.innerHTML = ""; // 기존 테이블 내용 초기화
 
+        rows = []; // 행 초기화
+        cols = []; // 열 초기화
+
         let counter = 1; // 숫자를 1부터 시작
 
         // 행과 열을 기반으로 테이블을 동적으로 생성
         for (let i = 0; i < rownum; i++) {
           const row = document.createElement("tr"); // 새로운 행 생성
+          rows.push(row); // 행 배열에 추가
 
+          const rowCells = []; // 현재 행의 셀 배열
           for (let j = 0; j < colnum; j++) {
             const cell = document.createElement("td"); // 새로운 셀 생성
             const input = document.createElement("input"); // 입력 필드 생성
@@ -62,12 +77,65 @@
             cell.appendChild(input); // 셀에 입력 필드 추가
             row.appendChild(cell); // 행에 셀 추가
 
+            rowCells.push(cell); // 행의 셀 배열에 추가
+
+            // 셀 클릭 이벤트 리스너
+            cell.addEventListener("click", function () {
+              handleCellClick(cell); // 셀 클릭 시 동작 실행
+            });
+
             counter++; // 숫자 증가
           }
 
+          cols.push(rowCells); // 각 행의 셀들을 열 배열에 추가
           tableBody.appendChild(row); // 테이블 본문에 행 추가
         }
+
+        // 초기 선택 셀 설정 (첫 번째 셀 선택)
+        handleCellClick(rows[0].cells[0]);
       }
+
+      function handleCellClick(cell) {
+        // 이전에 선택된 셀이 있으면 원래 배경색으로 되돌리기
+        if (selectedCell) {
+          selectedCell.classList.remove("selected");
+          const previousInput = selectedCell.querySelector("input");
+          if (previousInput) {
+            previousInput.style.backgroundColor = "white";
+          }
+        }
+
+        // 클릭된 셀의 배경색을 변경
+        cell.classList.add("selected");
+        const input = cell.querySelector("input");
+        if (input) {
+          input.style.backgroundColor = "gray"; // input의 배경색 변경
+        }
+
+        selectedCell = cell; // 현재 클릭된 셀을 selectedCell에 저장
+      }
+
+      // 키보드 화살표 이벤트
+      window.addEventListener("keydown", function (event) {
+        if (!selectedCell) return; // 선택된 셀이 없으면 아무 동작도 하지 않음
+
+        const rowIndex = selectedCell.parentNode.rowIndex;
+        const colIndex = selectedCell.cellIndex;
+
+        // 화살표 키에 대한 동작
+        if (event.key === "ArrowUp" && rowIndex > 0) {
+          handleCellClick(rows[rowIndex - 1].cells[colIndex]); // 위로 이동
+        } else if (event.key === "ArrowDown" && rowIndex < rows.length - 1) {
+          handleCellClick(rows[rowIndex + 1].cells[colIndex]); // 아래로 이동
+        } else if (event.key === "ArrowLeft" && colIndex > 0) {
+          handleCellClick(rows[rowIndex].cells[colIndex - 1]); // 왼쪽으로 이동
+        } else if (
+          event.key === "ArrowRight" &&
+          colIndex < cols[rowIndex].length - 1
+        ) {
+          handleCellClick(rows[rowIndex].cells[colIndex + 1]); // 오른쪽으로 이동
+        }
+      });
     </script>
   </body>
 </html>
