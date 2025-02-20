@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="d1"></div>
+    <button onclick="start()">예약실행</button>
+    <button onclick="stop()">예약취소</button>
+
+    <script>
+      let id = null;
+
+      const start = () => {
+        const d1E1 = document.querySelector(".d1");
+        id = setTimeout(() => {
+          d1E1.innerHTML = "setTimeout Result..";
+        }, 3000);
+
+        console.log("id", id);
+      };
+      //clearTimeout 취소코드
+      const stop = () => {
+        clearTimeout(id);
+      };
+    </script>
+  </body>
+</html>
