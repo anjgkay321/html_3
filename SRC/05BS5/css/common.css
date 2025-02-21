@@ -1,0 +1,44 @@
+:root{
+    font-size : 16px;
+}
+*{
+    box-sizing: border-box;
+}
+ul{
+    margin:0;padding :0;
+    list-style : none;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+
+/*  */
+.wrapper{}
+/*  */
+.wrapper>header{}
+.wrapper>header>.top-header{}
+.wrapper>header>nav{}
+/*  */
+.wrapper>main{}
+.wrapper>main>section{}
+
+.wrapper>main>section.banner .carousel-control-prev-icon,
+.wrapper>main>section.banner .carousel-control-next-icon
+{
+    background-color: darkgray;
+    padding : 25px;
+    border-radius: 50%;
+    font-size : 2rem !important;
+    
+    background-image: url('');
+    color:white;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1 !important;
+}
+
+/*  */
+.wrapper>footer{}
